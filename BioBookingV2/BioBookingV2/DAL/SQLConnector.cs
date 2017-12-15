@@ -176,7 +176,7 @@ namespace BioBookingV2.DAL
                 }
             }
             InsertString = InsertString.Substring(0, InsertString.Length - 2);
-            InsertString += ")";
+            InsertString += "); SELECT CAST(scope_identity() AS int)";
             try
             {
                 MovCreate.Id = Insert(InsertString);
@@ -195,7 +195,7 @@ namespace BioBookingV2.DAL
                 con.Open();
                 using (SqlCommand com = new SqlCommand(CommandText,con))
                 {
-                    return com.ExecuteNonQuery();
+                    return (Int32)com.ExecuteScalar();
                 }
             }
         }
