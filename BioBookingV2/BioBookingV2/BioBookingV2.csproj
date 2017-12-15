@@ -201,6 +201,12 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DTO\MovieDTO.cs" />
+    <Compile Include="DTO\ReservationDTO.cs" />
+    <Compile Include="DTO\ResourceDTO.cs" />
+    <Compile Include="DTO\ScreeningDTO.cs" />
+    <Compile Include="DTO\SeatDTO.cs" />
+    <Compile Include="DTO\TheaterDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
