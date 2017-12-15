@@ -179,7 +179,7 @@ namespace BioBookingV2.DAL
             InsertString += ")";
             try
             {
-                Insert(InsertString);
+                MovCreate.Id = Insert(InsertString);
             }
             catch (Exception Ex)
             {
@@ -188,14 +188,14 @@ namespace BioBookingV2.DAL
             return MovCreate;
         }
 
-        private void Insert(string CommandText)
+        private int Insert(string CommandText)
         {
             using (SqlConnection con = new SqlConnection(ConfigConnectionString))
             {
                 con.Open();
                 using (SqlCommand com = new SqlCommand(CommandText,con))
                 {
-                    com.ExecuteNonQuery();
+                    return com.ExecuteNonQuery();
                 }
             }
         }
