@@ -176,10 +176,10 @@ namespace BioBookingV2.DAL
                 }
             }
             InsertString = InsertString.Substring(0, InsertString.Length - 2);
-            InsertString += ")";
+            InsertString += "); SELECT CAST(scope_identity() AS int)";
             try
             {
-                Insert(InsertString);
+                MovCreate.Id = Insert(InsertString);
             }
             catch (Exception Ex)
             {
@@ -188,14 +188,14 @@ namespace BioBookingV2.DAL
             return MovCreate;
         }
 
-        private void Insert(string CommandText)
+        private int Insert(string CommandText)
         {
             using (SqlConnection con = new SqlConnection(ConfigConnectionString))
             {
                 con.Open();
                 using (SqlCommand com = new SqlCommand(CommandText,con))
                 {
-                    com.ExecuteNonQuery();
+                    return (Int32)com.ExecuteScalar();
                 }
             }
         }
