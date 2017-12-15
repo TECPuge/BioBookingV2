@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <h2>STOR FED PIK!!</h2>
+            <h2>DEN STØRSTE FEDESTE PIK!!</h2>
             <p>
             Test tekst til branch commit -KK</p>
             <p>
