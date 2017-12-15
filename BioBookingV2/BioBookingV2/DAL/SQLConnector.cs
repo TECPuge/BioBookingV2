@@ -11,61 +11,61 @@ namespace BioBookingV2.DAL
 {
     public class SQLConnector
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["BioBookingDB"].ConnectionString;
+        private string ConfigConnectionString = ConfigurationManager.ConnectionStrings["BioBookingDB"].ConnectionString;
 
         //Henter alt fra et tablenavn
-        public List<object> GetAll(string tableName)
+        public List<object> GetAll(string TableName)
         {
-            List<object> lisReturn = new List<object>();
+            List<object> LisReturn = new List<object>();
             try
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
+                using (SqlConnection Con = new SqlConnection(ConfigConnectionString))
                 {
-                    con.Open();
-                    using (SqlCommand com = new SqlCommand("SELECT * FROM " + tableName, con))
+                    Con.Open();
+                    using (SqlCommand Com = new SqlCommand("SELECT * FROM " + TableName, Con))
                     {
-                        using (SqlDataReader reader = com.ExecuteReader())
+                        using (SqlDataReader reader = Com.ExecuteReader())
                         {
-                            object objReturn = new object();
-                            switch (tableName)
+                            object ObjReturn = new object();
+                            switch (TableName)
                             {
                                 case "Movie":
-                                    MovieDTO movie = new MovieDTO();
-                                    objReturn = movie;
+                                    MovieDTO Movie = new MovieDTO();
+                                    ObjReturn = Movie;
                                     break;
                                 case "Reservation":
-                                    ReservationDTO reservation = new ReservationDTO();
-                                    objReturn = reservation;
+                                    ReservationDTO Reservation = new ReservationDTO();
+                                    ObjReturn = Reservation;
                                     break;
                                 case "Resource":
-                                    ResourceDTO resource = new ResourceDTO();
-                                    objReturn = resource;
+                                    ResourceDTO Resource = new ResourceDTO();
+                                    ObjReturn = Resource;
                                     break;
                                 case "Screening":
-                                    ScreeningDTO screening = new ScreeningDTO();
-                                    objReturn = screening;
+                                    ScreeningDTO Screening = new ScreeningDTO();
+                                    ObjReturn = Screening;
                                     break;
                                 case "Seat":
-                                    SeatDTO seat = new SeatDTO();
-                                    objReturn = seat;
+                                    SeatDTO Seat = new SeatDTO();
+                                    ObjReturn = Seat;
                                     break;
                                 case "Theater":
-                                    TheaterDTO theater = new TheaterDTO();
-                                    objReturn = theater;
+                                    TheaterDTO Theater = new TheaterDTO();
+                                    ObjReturn = Theater;
                                     break;
                                 default:
-                                    objReturn = null;
+                                    ObjReturn = null;
                                     break;
                             }
                             while (reader.Read())
                             {
-                                
+
                                 //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
-                                foreach (PropertyInfo pi in objReturn.GetType().GetProperties())
+                                foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
                                 {
-                                    pi.SetValue(objReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
+                                    pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
                                 }
-                                lisReturn.Add(objReturn);
+                                LisReturn.Add(ObjReturn);
                             }
                         }
                     }
@@ -73,61 +73,61 @@ namespace BioBookingV2.DAL
             }
             catch (Exception Ex)
             {
-                lisReturn.Add(Ex);
+                LisReturn.Add(Ex);
             }
-            return lisReturn;
+            return LisReturn;
         }
         //Henter en række fra et tablenavn hvor id findes
-        public object Get(string tableName, int id)
+        public object Get(string TableName, int Id)
         {
-            object objReturn = new object();
-            switch (tableName)
+            object ObjReturn = new object();
+            switch (TableName)
             {
                 case "Movie":
-                    MovieDTO movie = new MovieDTO();
-                    objReturn = movie;
+                    MovieDTO Movie = new MovieDTO();
+                    ObjReturn = Movie;
                     break;
                 case "Reservation":
-                    ReservationDTO reservation = new ReservationDTO();
-                    objReturn = reservation;
+                    ReservationDTO Reservation = new ReservationDTO();
+                    ObjReturn = Reservation;
                     break;
                 case "Resource":
-                    ResourceDTO resource = new ResourceDTO();
-                    objReturn = resource;
+                    ResourceDTO Resource = new ResourceDTO();
+                    ObjReturn = Resource;
                     break;
                 case "Screening":
-                    ScreeningDTO screening = new ScreeningDTO();
-                    objReturn = screening;
+                    ScreeningDTO Screening = new ScreeningDTO();
+                    ObjReturn = Screening;
                     break;
                 case "Seat":
-                    SeatDTO seat = new SeatDTO();
-                    objReturn = seat;
+                    SeatDTO Seat = new SeatDTO();
+                    ObjReturn = Seat;
                     break;
                 case "Theater":
-                    TheaterDTO theater = new TheaterDTO();
-                    objReturn = theater;
+                    TheaterDTO Theater = new TheaterDTO();
+                    ObjReturn = Theater;
                     break;
                 default:
-                    objReturn = null;
+                    ObjReturn = null;
                     break;
             }
-            if (objReturn != null)
+            if (ObjReturn != null)
             {
                 try
                 {
-                    using (SqlConnection con = new SqlConnection(connectionString))
+                    using (SqlConnection con = new SqlConnection(ConfigConnectionString))
                     {
                         con.Open();
-                        using (SqlCommand com = new SqlCommand("SELECT * FROM "+ tableName + " where id = " + id.ToString(), con))
+                        using (SqlCommand com = new SqlCommand("SELECT * FROM " + TableName + " where id = " + Id.ToString(), con))
                         {
                             using (SqlDataReader reader = com.ExecuteReader())
                             {
                                 while (reader.Read())
                                 {
                                     //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
-                                    foreach (PropertyInfo pi in objReturn.GetType().GetProperties())
+                                    foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
                                     {
-                                        pi.SetValue(objReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
+                                        pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
                                     }
                                 }
                             }
@@ -139,30 +139,65 @@ namespace BioBookingV2.DAL
                     return Ex;
                 }
             }
-            return objReturn;
+            return ObjReturn;
         }
 
-        public object Create(object ObjCreate)
+        public MovieDTO CreateMovie(MovieDTO MovCreate)
         {
-            string Insert = "INSERT INTO ";
-            Insert += ObjCreate
-            string Values = " VALUES (";
-            try
+            string InsertString = "INSERT INTO Movie (";
+            foreach (PropertyInfo pi in MovCreate.GetType().GetProperties())
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
+                if (pi.GetValue(MovCreate) != null && pi.Name != "Id")
                 {
-                    con.Open();
-                    using (SqlCommand com = new SqlCommand())
+                    InsertString += pi.Name + ", ";
+                }
+            }
+            InsertString = InsertString.Substring(0, InsertString.Length - 2);
+            InsertString += ") VALUES (";
+            foreach (PropertyInfo pi in MovCreate.GetType().GetProperties())
+            {
+                if (pi.GetValue(MovCreate) != null && pi.Name != "Id")
+                {
+                    if (pi.PropertyType != "".GetType())
                     {
-
+                        if (pi.PropertyType == typeof(decimal))
+                        {
+                            InsertString += Convert.ToString(pi.GetValue(MovCreate)).Replace(",",".") + ", "; 
+                        }
+                        else
+                        {
+                            InsertString += Convert.ToString(pi.GetValue(MovCreate)) + ", ";
+                        }
+                    }
+                    else
+                    {
+                        InsertString += "'" + Convert.ToString(pi.GetValue(MovCreate)) + "', "; 
                     }
                 }
             }
+            InsertString = InsertString.Substring(0, InsertString.Length - 2);
+            InsertString += ")";
+            try
+            {
+                Insert(InsertString);
+            }
             catch (Exception Ex)
             {
-                return Ex;
+                throw Ex;
             }
-            return ObjCreate;
+            return MovCreate;
+        }
+
+        private void Insert(string CommandText)
+        {
+            using (SqlConnection con = new SqlConnection(ConfigConnectionString))
+            {
+                con.Open();
+                using (SqlCommand com = new SqlCommand(CommandText,con))
+                {
+                    com.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
