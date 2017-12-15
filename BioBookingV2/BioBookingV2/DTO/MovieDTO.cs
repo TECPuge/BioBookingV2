@@ -11,6 +11,6 @@ namespace BioBookingV2.DTO
         public string Title { get; set; }
         public string Description { get; set; }
         public string PosterFileName { get; set; }
-        public decimal? Price { get; set; }
+        public decimal Price { get; set; }
     }
 }
