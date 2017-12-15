@@ -24,6 +24,7 @@
                 <asp:TextBox ID="inputTextBox" runat ="server"></asp:TextBox>
                 <asp:Button ID="SubmitButton" runat="server" Text="Test" OnClick="SubmitButton_Click" />
             </p>
+            <p><asp:Button ID ="SeedButton" runat="server" Text="Seed Database" OnClick="SeedButton_Click" /></p>
             <p>********* TESTING AREA BELOW: *********</p>
             <p><asp:Label ID="TestLabel" runat="server" /></p>
         </div>
