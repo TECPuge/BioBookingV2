@@ -56,7 +56,8 @@ namespace BioBookingV2
                 PosterFileName = "PosterFileName Only",
                 Price = 13.37M
             };
-            movie2 = con.CreateMovie(movie2);
+            movie2 = (MovieDTO)con.CreateObject(movie2);
+            TestLabel.Text = "ID for seeded movie: " + movie2.Id.ToString();
         }
     }
 }
