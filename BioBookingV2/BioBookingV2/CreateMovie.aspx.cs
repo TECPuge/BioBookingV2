@@ -53,9 +53,10 @@ namespace BioBookingV2
                             Price = Price
                         };
                         // Insert new movie into table
-                        NewMovie = con.CreateMovie(NewMovie);
+                        NewMovie = (MovieDTO)(con.CreateObject(NewMovie));
                     }
-                } else
+                }
+                else
                 {
                     LabelUploadText.Text = "Billede til film skal uploads!";
                     LabelUploadText.ForeColor = System.Drawing.Color.Red;
@@ -64,22 +65,25 @@ namespace BioBookingV2
         }
         private bool FileUpload(string ImagePath, string FileExtension)
         {
-            bool output = true;
+            bool output = false;
             // Open SQL connection
             SQLConnector con = new SQLConnector();
 
             // Create and populate list of allowed file extensions to upload
-            List<string> AllowedExtensions = new List<string>();
-            AllowedExtensions.Add(".gif");
-            AllowedExtensions.Add(".jpeg");
-            AllowedExtensions.Add(".jpg");
-            AllowedExtensions.Add(".png");
+            List<string> AllowedExtensions = new List<string>
+            {
+                ".gif",
+                ".jpeg",
+                ".jpg",
+                ".png"
+            };
             // Check if file extension is allowed and save the file
             if (AllowedExtensions.Contains(FileExtension))
             {
                 try
                 {
                     FileUploadPoster.SaveAs(ImagePath);
+                    output = true;
                 }
                 catch (Exception)
                 {
@@ -90,7 +94,6 @@ namespace BioBookingV2
             {
                 LabelUploadText.Text = "Filen skal være i et af følgende formater: .gif, .jpeg, .jpg, .png";
                 LabelUploadText.ForeColor = System.Drawing.Color.Red;
-                output = false;
             }
             return output;
         }
