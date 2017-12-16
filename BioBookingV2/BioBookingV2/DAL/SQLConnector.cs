@@ -26,54 +26,56 @@ namespace BioBookingV2.DAL
                     {
                         using (SqlDataReader reader = Com.ExecuteReader())
                         {
-                            object ObjReturn = new object();
-                            switch (TableName)
-                            {
-                                case "Movie":
-                                    MovieDTO Movie = new MovieDTO();
-                                    ObjReturn = Movie;
-                                    break;
-                                case "Reservation":
-                                    ReservationDTO Reservation = new ReservationDTO();
-                                    ObjReturn = Reservation;
-                                    break;
-                                case "Resource":
-                                    ResourceDTO Resource = new ResourceDTO();
-                                    ObjReturn = Resource;
-                                    break;
-                                case "Screening":
-                                    ScreeningDTO Screening = new ScreeningDTO();
-                                    ObjReturn = Screening;
-                                    break;
-                                case "Seat":
-                                    SeatDTO Seat = new SeatDTO();
-                                    ObjReturn = Seat;
-                                    break;
-                                case "Theater":
-                                    TheaterDTO Theater = new TheaterDTO();
-                                    ObjReturn = Theater;
-                                    break;
-                                default:
-                                    ObjReturn = null;
-                                    break;
-                            }
                             while (reader.Read())
                             {
-
-                                //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
-                                foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
+                                object ObjReturn = new object();
+                                switch (TableName)
                                 {
-                                    if (pi.PropertyType != typeof(bool))
-                                    {
-                                        pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
-                                    }
-                                    else
-                                    {
-                                        //Hvis boolsk property, sæt baseret på bit i DB
-                                        pi.SetValue(ObjReturn, ((int)reader.GetValue(reader.GetOrdinal(pi.Name)) == 1 ? true : false));
-                                    }
+                                    case "Movie":
+                                        MovieDTO Movie = new MovieDTO();
+                                        ObjReturn = Movie;
+                                        break;
+                                    case "Reservation":
+                                        ReservationDTO Reservation = new ReservationDTO();
+                                        ObjReturn = Reservation;
+                                        break;
+                                    case "Resource":
+                                        ResourceDTO Resource = new ResourceDTO();
+                                        ObjReturn = Resource;
+                                        break;
+                                    case "Screening":
+                                        ScreeningDTO Screening = new ScreeningDTO();
+                                        ObjReturn = Screening;
+                                        break;
+                                    case "Seat":
+                                        SeatDTO Seat = new SeatDTO();
+                                        ObjReturn = Seat;
+                                        break;
+                                    case "Theater":
+                                        TheaterDTO Theater = new TheaterDTO();
+                                        ObjReturn = Theater;
+                                        break;
+                                    default:
+                                        ObjReturn = null;
+                                        break;
                                 }
-                                LisReturn.Add(ObjReturn);
+                                if (ObjReturn != null)
+                                {
+                                    //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
+                                    foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
+                                    {
+                                        //if (pi.PropertyType == typeof(DateTime))
+                                        //{
+                                        //    pi.SetValue(ObjReturn, (DateTime)reader.GetValue(reader.GetOrdinal(pi.Name)));
+                                        //}
+                                        //else 
+                                        //if (pi.PropertyType != typeof(bool))
+                                        //{
+                                            pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
+                                        //}
+                                    }
+                                    LisReturn.Add(ObjReturn);
+                                }
                             }
                         }
                     }
@@ -135,15 +137,15 @@ namespace BioBookingV2.DAL
                                     //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
                                     foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
                                     {
-                                        if (pi.PropertyType != typeof(bool))
-                                        {
+                                        //if (pi.PropertyType == typeof(DateTime))
+                                        //{
+                                        //    pi.SetValue(ObjReturn, (DateTime)reader.GetValue(reader.GetOrdinal(pi.Name)));
+                                        //}
+                                        //else 
+                                        //if (pi.PropertyType != typeof(bool))
+                                        //{
                                             pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
-                                        }
-                                        else
-                                        {
-                                            //Hvis boolsk property, sæt baseret på bit i DB
-                                            pi.SetValue(ObjReturn, ((int)reader.GetValue(reader.GetOrdinal(pi.Name)) == 1 ? true : false));
-                                        }
+                                        //}
                                     }
                                 }
                             }
@@ -158,98 +160,79 @@ namespace BioBookingV2.DAL
             return ObjReturn;
         }
 
-        //public MovieDTO CreateMovie(MovieDTO MovCreate)
-        //{
-        //    string InsertString = "INSERT INTO Movie (";
-        //    foreach (PropertyInfo pi in MovCreate.GetType().GetProperties())
-        //    {
-        //        if (pi.GetValue(MovCreate) != null && pi.Name != "Id")
-        //        {
-        //            InsertString += pi.Name + ", ";
-        //        }
-        //    }
-        //    InsertString = InsertString.Substring(0, InsertString.Length - 2);
-        //    InsertString += ") VALUES (";
-        //    foreach (PropertyInfo pi in MovCreate.GetType().GetProperties())
-        //    {
-        //        if (pi.GetValue(MovCreate) != null && pi.Name != "Id")
-        //        {
-        //            if (pi.PropertyType == typeof(string))
-        //            {
-        //                InsertString += "'" + Convert.ToString(pi.GetValue(MovCreate)) + "', ";
-        //            }
-        //            else if (pi.PropertyType == typeof(decimal))
-        //            {
-        //                InsertString += Convert.ToString(pi.GetValue(MovCreate)).Replace(",", ".") + ", ";
-        //            }
-        //            else
-        //            {
-        //                InsertString += Convert.ToString(pi.GetValue(MovCreate)) + ", ";
-        //            }
-        //        }
-        //    }
-        //    InsertString = InsertString.Substring(0, InsertString.Length - 2);
-        //    InsertString += "); SELECT CAST(scope_identity() AS int)";
-        //    try
-        //    {
-        //        MovCreate.Id = Insert(InsertString);
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        throw Ex;
-        //    }
-        //    return MovCreate;
-        //}
+        public object UpdateObject(object ObjReturn)
+        {
+            //Find table navn fra objecttype
+            string TableName = string.Empty;
+            Type ObjectType = ObjReturn.GetType();
+            if (ObjectType == typeof(MovieDTO))
+            {
+                TableName = "Movie";
+            }
+            else if (ObjectType == typeof(ReservationDTO))
+            {
+                TableName = "Reservation";
 
-        //public ResourceDTO CreateResource(ResourceDTO ResCreate)
-        //{
-        //    string InsertString = "INSERT INTO Resource (";
-        //    foreach (PropertyInfo pi in ResCreate.GetType().GetProperties())
-        //    {
-        //        if (pi.GetValue(ResCreate) != null && pi.Name != "Id")
-        //        {
-        //            InsertString += pi.Name + ", ";
-        //        }
-        //    }
-        //    InsertString = InsertString.Substring(0, InsertString.Length - 2);
-        //    InsertString += ") VALUES (";
-        //    foreach (PropertyInfo pi in ResCreate.GetType().GetProperties())
-        //    {
-        //        if (pi.GetValue(ResCreate) != null && pi.Name != "Id")
-        //        {
-        //            if (pi.PropertyType != "".GetType())
-        //            {
-        //                if (pi.PropertyType == typeof(decimal))
-        //                {
-        //                    InsertString += Convert.ToString(pi.GetValue(ResCreate)).Replace(",", ".") + ", ";
-        //                }
-        //                else if (pi.Prop)
-        //                {
+            }
+            else if (ObjectType == typeof(ResourceDTO))
+            {
+                TableName = "Resource";
+            }
+            else if (ObjectType == typeof(ScreeningDTO))
+            {
 
-        //                }
-        //                else
-        //                {
-        //                    InsertString += Convert.ToString(pi.GetValue(ResCreate)) + ", ";
-        //                }
-        //            }
-        //            else
-        //            {
-        //                InsertString += "'" + Convert.ToString(pi.GetValue(ResCreate)) + "', ";
-        //            }
-        //        }
-        //    }
-        //    InsertString = InsertString.Substring(0, InsertString.Length - 2);
-        //    InsertString += "); SELECT CAST(scope_identity() AS int)";
-        //    try
-        //    {
-        //        ResCreate.Id = Insert(InsertString);
-        //    }
-        //    catch (Exception Ex)
-        //    {
-        //        throw Ex;
-        //    }
-        //    return ResCreate;
-        //}
+                TableName = "Screening";
+            }
+            else if (ObjectType == typeof(SeatDTO))
+            {
+                TableName = "Seat";
+            }
+            else if (ObjectType == typeof(TheaterDTO))
+            {
+                TableName = "Theater";
+            }
+            //Genererer kolonnenavne og values baseret på DTO's property types
+            string InsertString = "UPDATE " + TableName + " SET ";
+            foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
+            {
+                if (pi.GetValue(ObjReturn) != null && pi.Name != "Id")
+                {
+                    InsertString += pi.Name + " = ";
+                    if (pi.PropertyType == typeof(decimal))
+                    {
+                        InsertString += Convert.ToString(pi.GetValue(ObjReturn)).Replace(",", ".") + ", ";
+                    }
+                    else if (pi.PropertyType == typeof(string))
+                    {
+                        InsertString += "'" + Convert.ToString(pi.GetValue(ObjReturn)) + "', ";
+                    }
+                    else if (pi.PropertyType == typeof(bool))
+                    {
+                        InsertString += Convert.ToString(((bool)pi.GetValue(ObjReturn) ? 1 : 0)) + ", ";
+                    }
+                    else if (pi.PropertyType == typeof(DateTime))
+                    {
+                        InsertString += "'" + ((DateTime)pi.GetValue(ObjReturn)).ToString("yyyy-MM-dd HH:mm:ss.fffffff") + "', ";
+                    }
+                    else
+                    {
+                        InsertString += Convert.ToString(pi.GetValue(ObjReturn)) + ", ";
+                    }
+                }
+            }
+            InsertString = InsertString.Substring(0, InsertString.Length - 2);
+            InsertString += " WHERE Id = " + ObjReturn.GetType().GetProperties().ToList().FirstOrDefault(p => p.Name == "Id").GetValue(ObjReturn);
+            //Updater række i databasen
+            try
+            {
+                Insert(InsertString);
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+            return ObjReturn;
+        }
 
         public object CreateObject(object ObjReturn)
         {
@@ -267,7 +250,7 @@ namespace BioBookingV2.DAL
             }
             else if (ObjectType == typeof(ResourceDTO))
             {
-                TableName = "Screening";
+                TableName = "Resource";
             }
             else if (ObjectType == typeof(ScreeningDTO))
             {
@@ -309,6 +292,10 @@ namespace BioBookingV2.DAL
                     {
                         InsertString += Convert.ToString(((bool)pi.GetValue(ObjReturn) ? 1 : 0)) + ", ";
                     }
+                    else if (pi.PropertyType == typeof(DateTime))
+                    {
+                        InsertString += "'" + ((DateTime)pi.GetValue(ObjReturn)).ToString("yyyy-MM-dd HH:mm:ss.fffffff") + "', ";
+                    }
                     else
                     {
                         InsertString += Convert.ToString(pi.GetValue(ObjReturn)) + ", ";
@@ -331,21 +318,21 @@ namespace BioBookingV2.DAL
 
         public int GetTableNextId(string TableName)
         {
-                try
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConfigConnectionString))
                 {
-                    using (SqlConnection con = new SqlConnection(ConfigConnectionString))
+                    con.Open();
+                    using (SqlCommand com = new SqlCommand("SELECT CAST(IDENT_CURRENT('" + TableName + "') + 1 AS INT) as NextId", con))
                     {
-                        con.Open();
-                        using (SqlCommand com = new SqlCommand("SELECT CAST(IDENT_CURRENT('" + TableName + "') + 1 AS INT) as NextId", con))
-                        {
-                            return (Int32)com.ExecuteScalar();
-                        }
+                        return (Int32)com.ExecuteScalar();
                     }
                 }
-                catch (Exception Ex)
-                {
-                    return 0;
-                }
+            }
+            catch (Exception Ex)
+            {
+                return 0;
+            }
         }
 
         private int Insert(string CommandText)

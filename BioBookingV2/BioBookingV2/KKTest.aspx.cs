@@ -56,7 +56,48 @@ namespace BioBookingV2
                 PosterFileName = "PosterFileName Only",
                 Price = 13.37M
             };
+            ResourceDTO resource = new ResourceDTO()
+            {
+                LoginName = "BoNi",
+                LoginPassword = "Kodeord123",
+                FirstName = "Bo",
+                LastName = "Nielsen",
+                Employee = false
+            };
+            TheaterDTO theater = new TheaterDTO()
+            {
+                Name = "Sal 1",
+                NumberOfSeats = 40
+            };
+            ScreeningDTO screening = new ScreeningDTO()
+            {
+                MovieId = 2,
+                TheaterId = 1,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddHours(3),
+                AvailableSeats = 40
+            };
+            List<MovieDTO> lisMovies = new List<MovieDTO>();
+            lisMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
+            List<ResourceDTO> lisResource = new List<ResourceDTO>();
+            lisResource = con.GetAll("Resource").Cast<ResourceDTO>().ToList();
+            List<TheaterDTO> lisTheater = new List<TheaterDTO>();
+            lisTheater = con.GetAll("Theater").Cast<TheaterDTO>().ToList();
+            List<ScreeningDTO> lisScreening = new List<ScreeningDTO>();
+            lisScreening = con.GetAll("Screening").Cast<ScreeningDTO>().ToList();
             movie2 = (MovieDTO)con.CreateObject(movie2);
+            resource = (ResourceDTO)con.CreateObject(resource);
+            theater = (TheaterDTO)con.CreateObject(theater);
+            screening = (ScreeningDTO)con.CreateObject(screening);
+            MovieDTO movie3 = new MovieDTO()
+            {
+                Id = 5,
+                Title = "UPDATED Title Only",
+                Description = "UPDATED Description Only",
+                PosterFileName = "UPDATED PosterFileName Only",
+                Price = 1113.37M
+            };
+            con.UpdateObject(movie3);
             TestLabel.Text = "ID for seeded movie: " + movie2.Id.ToString();
         }
     }

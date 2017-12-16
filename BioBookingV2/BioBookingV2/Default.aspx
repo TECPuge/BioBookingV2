@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <h2>DEN STØRSTE FEDESTE PIK!!</h2>
+            <h2>Lidt mere sober h2</h2>
             <p>
                 KK was here.
             </p>
