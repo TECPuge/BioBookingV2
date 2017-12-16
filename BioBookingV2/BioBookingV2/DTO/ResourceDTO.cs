@@ -12,6 +12,6 @@ namespace BioBookingV2.DTO
         public string LoginPassword { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public bool Employee { get; }
+        public bool Employee { get; set; }
     }
 }
