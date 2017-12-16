@@ -16,12 +16,13 @@
         <input id="InputDescription" type="text" runat="server"/>
         <asp:RequiredFieldValidator ID="CheckDescription" runat="server" ControlToValidate="InputDescription" ForeColor="Red" ErrorMessage="Film beskrivelse skal udfyldes!"></asp:RequiredFieldValidator>
         <br/>
-        <asp:Label ID="LabelPrice" runat="server" Text="Indtast billetpris:"></asp:Label>
+        <asp:Label ID="LabelPrice" runat="server" Text="Indtast billet pris:"></asp:Label>
         <input id="InputPrice" type="text" runat="server"/>
         <asp:RequiredFieldValidator ID="CheckPrice" runat="server" ControlToValidate="InputPrice" ForeColor="Red" ErrorMessage="Billetpris skal udfyldes!"></asp:RequiredFieldValidator>
+        <asp:RegularExpressionValidator ID="RegularExpressionValidatorPrice" runat="server" ControlToValidate="InputPrice" forecolor="red" ErrorMessage="Billet pris skal være et tal!" ValidationExpression="^\d+$" ></asp:RegularExpressionValidator>
         <br/>
         <asp:Label ID="LabelPoster" runat="server" Text="Upload billede:"></asp:Label>
-        <asp:FileUpload ID="FileUpload1" runat="server" />
+        <asp:FileUpload ID="FileUploadPoster" runat="server" /><asp:Label ID="LabelUploadText" runat="server"></asp:Label>
         <br/>
         
         <asp:Button ID="ButtonCreate" runat="server" OnClick="ButtonCreate_Click" Text="Opret film" />

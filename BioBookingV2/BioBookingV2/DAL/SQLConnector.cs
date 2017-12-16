@@ -188,6 +188,25 @@ namespace BioBookingV2.DAL
             return MovCreate;
         }
 
+        public int GetTableNextId(string TableName)
+        {
+                try
+                {
+                    using (SqlConnection con = new SqlConnection(ConfigConnectionString))
+                    {
+                        con.Open();
+                        using (SqlCommand com = new SqlCommand("SELECT CAST(IDENT_CURRENT('" + TableName + "') + 1 AS INT) as NextId", con))
+                        {
+                            return (Int32)com.ExecuteScalar();
+                        }
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    return 0;
+                }
+        }
+
         private int Insert(string CommandText)
         {
             using (SqlConnection con = new SqlConnection(ConfigConnectionString))
