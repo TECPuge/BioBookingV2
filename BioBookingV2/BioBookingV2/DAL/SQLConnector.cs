@@ -64,15 +64,7 @@ namespace BioBookingV2.DAL
                                     //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
                                     foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
                                     {
-                                        //if (pi.PropertyType == typeof(DateTime))
-                                        //{
-                                        //    pi.SetValue(ObjReturn, (DateTime)reader.GetValue(reader.GetOrdinal(pi.Name)));
-                                        //}
-                                        //else 
-                                        //if (pi.PropertyType != typeof(bool))
-                                        //{
-                                            pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
-                                        //}
+                                        pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
                                     }
                                     LisReturn.Add(ObjReturn);
                                 }
@@ -137,15 +129,7 @@ namespace BioBookingV2.DAL
                                     //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
                                     foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
                                     {
-                                        //if (pi.PropertyType == typeof(DateTime))
-                                        //{
-                                        //    pi.SetValue(ObjReturn, (DateTime)reader.GetValue(reader.GetOrdinal(pi.Name)));
-                                        //}
-                                        //else 
-                                        //if (pi.PropertyType != typeof(bool))
-                                        //{
-                                            pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
-                                        //}
+                                        pi.SetValue(ObjReturn, reader.GetValue(reader.GetOrdinal(pi.Name)));
                                     }
                                 }
                             }
@@ -342,7 +326,7 @@ namespace BioBookingV2.DAL
                 con.Open();
                 using (SqlCommand com = new SqlCommand(CommandText, con))
                 {
-                    return (Int32)com.ExecuteScalar();
+                    return Convert.ToInt32(com.ExecuteScalar());
                 }
             }
         }
