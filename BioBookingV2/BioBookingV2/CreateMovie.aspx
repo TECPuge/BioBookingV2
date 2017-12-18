@@ -1,33 +1,58 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateMovie.aspx.cs" Inherits="BioBookingV2.CreateMovie" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="CreateMovie.aspx.cs" Inherits="BioBookingV2.CreateMovie" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="Empty_Space"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="well well-sm">
+                    <!-- <form class="form-horizontal" method="post"> -->
+                    <legend class="text-center">Opret ny film</legend>
+                    <div class="Empty_Space"></div>
+                    <fieldset>
+                        <!-- Title input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="name">Titel</label>
+                            <div class="col-md-9">
+                                <asp:TextBox ID="InputTitle" runat="server" class="form-control" placeholder="Sharknado 2"></asp:TextBox>
+                            </div>
+                        </div>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <asp:Label ID="LabelTitle" runat="server" Text="Indtast film titel:"></asp:Label>
-        <input id="InputTitle" type="text" runat="server"/>
-        <asp:RequiredFieldValidator ID="CheckTitle" runat="server" ControlToValidate="InputTitle" ForeColor="Red" ErrorMessage="Film titel skal udfyldes!"></asp:RequiredFieldValidator>
-        <br/>
-        <asp:Label ID="LabelDescription" runat="server" Text="Indtast filmbeskrivelse:"></asp:Label>
-        <input id="InputDescription" type="text" runat="server"/>
-        <asp:RequiredFieldValidator ID="CheckDescription" runat="server" ControlToValidate="InputDescription" ForeColor="Red" ErrorMessage="Film beskrivelse skal udfyldes!"></asp:RequiredFieldValidator>
-        <br/>
-        <asp:Label ID="LabelPrice" runat="server" Text="Indtast billet pris:"></asp:Label>
-        <input id="InputPrice" type="text" runat="server"/>
-        <asp:RequiredFieldValidator ID="CheckPrice" runat="server" ControlToValidate="InputPrice" ForeColor="Red" ErrorMessage="Billetpris skal udfyldes!"></asp:RequiredFieldValidator>
-        <asp:RegularExpressionValidator ID="RegularExpressionValidatorPrice" runat="server" ControlToValidate="InputPrice" forecolor="red" ErrorMessage="Billet pris skal være et tal!" ValidationExpression="^\d+$" ></asp:RegularExpressionValidator>
-        <br/>
-        <asp:Label ID="LabelPoster" runat="server" Text="Upload billede:"></asp:Label>
-        <asp:FileUpload ID="FileUploadPoster" runat="server" /><asp:Label ID="LabelUploadText" runat="server"></asp:Label>
-        <br/>
-        
-        <asp:Button ID="ButtonCreate" runat="server" OnClick="ButtonCreate_Click" Text="Opret film" />
-        
-        <br />
-    </form>
-    </body>
-</html>
+                        <!-- Price input-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="email">Billet pris</label>
+                            <div class="col-md-9">
+                                <asp:TextBox runat="server" ID="InputPrice" name="InputPrice" type="text" placeholder="kr. 50" class="form-control"></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <!-- Description body -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="message">Beskrivelse</label>
+                            <div class="col-md-9">
+                                <asp:TextBox runat="server" class="form-control" ID="InputDescription" name="InputDescription" placeholder="Fin and April are on their way to New York City, until a category seven hurricane spawns heavy rain, storm surges, and deadly Sharknadoes..."></asp:TextBox>
+                            </div>
+                        </div>
+
+                        <!-- Upload billede-->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="message">Upload billede</label>
+                            <div class="col-md-9">
+                                <asp:FileUpload ID="FileUploadPoster" runat="server" />
+                            </div>
+                        </div>
+
+                        <!-- Form actions -->
+                        <div class="form-group">
+                            <div class="col text-right">
+                                <asp:Button runat="server" type="submit" class="btn btn-primary btn-lg" OnClick="ButtonCreate_Click" Text="Opret film"></asp:Button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</asp:Content>
+
