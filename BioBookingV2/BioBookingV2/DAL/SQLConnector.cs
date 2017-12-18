@@ -14,15 +14,40 @@ namespace BioBookingV2.DAL
         private string ConfigConnectionString = ConfigurationManager.ConnectionStrings["BioBookingDB"].ConnectionString;
 
         //Henter alt fra et tablenavn
-        public List<object> GetAll(string TableName)
+        public List<object> GetAll(string TableName, string ColumnToCheckName = null, string ValueToMatch = null, Type Type = null)
         {
             List<object> LisReturn = new List<object>();
+            string FilterString = string.Empty;
+            if (ColumnToCheckName != null && ValueToMatch != null && Type != null)
+            {
+                if (Type == typeof(decimal))
+                {
+                    FilterString = (" WHERE " + ColumnToCheckName + " = " + ValueToMatch.Replace(",", "."));
+                }
+                else if (Type == typeof(string))
+                {
+                    FilterString = (" WHERE " + ColumnToCheckName + " = '" + ValueToMatch + "'");
+                }
+                else if (Type == typeof(bool))
+                {
+                    FilterString = (" WHERE " + ColumnToCheckName + " = " + (Convert.ToBoolean(ValueToMatch) ? 1 : 0));
+                }
+                else if (Type == typeof(DateTime))
+                {
+                    FilterString = (" WHERE " + ColumnToCheckName + " = '" + Convert.ToDateTime(ValueToMatch).ToString("yyyy-MM-dd HH:mm:ss.fffffff") + "'");
+                }
+                else if (Type == typeof(int))
+                {
+                    FilterString = (" WHERE " + ColumnToCheckName + " = " + ValueToMatch);
+                }
+            }
             try
             {
                 using (SqlConnection Con = new SqlConnection(ConfigConnectionString))
                 {
                     Con.Open();
-                    using (SqlCommand Com = new SqlCommand("SELECT * FROM " + TableName, Con))
+                    string CommandString = "SELECT * FROM " + TableName + FilterString;
+                    using (SqlCommand Com = new SqlCommand(CommandString, Con))
                     {
                         using (SqlDataReader reader = Com.ExecuteReader())
                         {
