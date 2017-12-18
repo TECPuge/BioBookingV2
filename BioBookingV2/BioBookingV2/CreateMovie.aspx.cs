@@ -19,47 +19,69 @@ namespace BioBookingV2
         }
         protected void ButtonCreate_Click(object sender, EventArgs e)
         {
+            // Input validation
+            string ErrorMessage = null;
             decimal Price = 0;
-            // Todo error handling on decimal (Raise friendly error dialog)
-            if (Decimal.TryParse(InputPrice.Value, out Price))
+            if (String.IsNullOrEmpty(InputTitle.Text))
             {
-                // Open SQL connection
-                SQLConnector con = new SQLConnector();
+                ErrorMessage = ErrorMessage + "\\nTitel skal udfyldes";
+                //Response.Write("<script>alert('');</script>");
+                //return;
+            }
+            if (!Decimal.TryParse(InputPrice.Text, out Price))
+            {
+                ErrorMessage = ErrorMessage + "\\nBillet pris skal udfyldes";
+                //Response.Write("<script>alert('Billet pris skal være et tal.');</script>");
+                //return;
+            }
+            if (!FileUploadPoster.HasFile)
+            {
+                ErrorMessage = ErrorMessage + "\\nBillede skal vælges";
+                //Response.Write("<script>alert('Billede skal uploades');</script>");
+                //return;
+            }
+            if (String.IsNullOrEmpty(InputTitle.Text) || InputTitle.Text.Length > 250)
+            {
+                ErrorMessage = ErrorMessage + "\\nBeskrivelse skal udfyldes og må ikke overskride 250 karakterer";
 
-                // Get file extension (example: .png)
-                var FileExtension = Path.GetExtension(FileUploadPoster.PostedFile.FileName).ToLower();
+            }
+            if (ErrorMessage != null)
+            {
+                ErrorMessage = "Film kunne ikke oprettes:" + ErrorMessage;
+                Response.Write("<script>alert('" + ErrorMessage + "');</script>");
+                return;
+            }
+            // Open SQL connection  
+            SQLConnector con = new SQLConnector();
 
-                // Get next identity of Movie to insert poster
-                int NextMovieId = con.GetTableNextId("Movie");
+            // Get file extension (example: .png)
+            var FileExtension = Path.GetExtension(FileUploadPoster.PostedFile.FileName).ToLower();
 
-                // Get poster file name and server location
-                string ImagePath = Server.MapPath("~/Content/Images/");
-                string ImageName = "Poster" + NextMovieId.ToString() + FileExtension;
+            // Get next identity of Movie to insert poster
+            int NextMovieId = con.GetTableNextId("Movie");
+
+            // Get poster file name and server location
+            string ImagePath = Server.MapPath("~/Content/Images/");
+            string ImageName = "Poster" + NextMovieId.ToString() + FileExtension;
 
 
-                if (FileUploadPoster.HasFile)
+            if (FileUploadPoster.HasFile)
+            {
+                // Save uploaded image to server
+                bool success = FileUpload(ImagePath + ImageName, FileExtension);
+
+                if (success)
                 {
-                    // Save uploaded image to server
-                    bool success = FileUpload(ImagePath + ImageName, FileExtension);
-
-                    if (success)
+                    // Create Movie object to insert
+                    MovieDTO NewMovie = new MovieDTO
                     {
-                        // Create Movie object to insert
-                        MovieDTO NewMovie = new MovieDTO
-                        {
-                            Title = InputTitle.Value,
-                            Description = InputDescription.Value,
-                            PosterFileName = (FileUploadPoster.HasFile ? ImageName : "NotMadeYet.png"),
-                            Price = Price
-                        };
-                        // Insert new movie into table
-                        NewMovie = (MovieDTO)(con.CreateObject(NewMovie));
-                    }
-                }
-                else
-                {
-                    LabelUploadText.Text = "Billede til film skal uploads!";
-                    LabelUploadText.ForeColor = System.Drawing.Color.Red;
+                        Title = InputTitle.Text,
+                        Description = InputDescription.Text,
+                        PosterFileName = (FileUploadPoster.HasFile ? ImageName : "NotMadeYet.png"),
+                        Price = Price
+                    };
+                    // Insert new movie into table
+                    NewMovie = (MovieDTO)(con.CreateObject(NewMovie));
                 }
             }
         }
@@ -92,8 +114,7 @@ namespace BioBookingV2
             }
             else
             {
-                LabelUploadText.Text = "Filen skal være i et af følgende formater: .gif, .jpeg, .jpg, .png";
-                LabelUploadText.ForeColor = System.Drawing.Color.Red;
+                Response.Write("<script>alert('Filen skal være i et af følgende formater: .gif, .jpeg, .jpg, .png');</script>");
             }
             return output;
         }
