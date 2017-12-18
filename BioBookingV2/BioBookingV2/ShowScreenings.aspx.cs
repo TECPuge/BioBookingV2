@@ -10,6 +10,8 @@ using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BioBookingV2.DAL;
+using BioBookingV2.DTO;
 
 namespace BioBookingV2
 {
@@ -18,20 +20,30 @@ namespace BioBookingV2
         protected void Page_Load(object sender, EventArgs e)
         {
             VisningerLabel.Text = "Select Movie";
+            SQLConnector con = new SQLConnector();
             if (!Page.IsPostBack)
             {
-                string constr = ConfigurationManager.ConnectionStrings["BioBookingDB"].ConnectionString;
-                SqlConnection con = new SqlConnection(constr);
-                con.Open();
+                //string constr = ConfigurationManager.ConnectionStrings["BioBookingDB"].ConnectionString;
+                //SqlConnection con = new SqlConnection(constr);
+                //con.Open();
 
-                SqlCommand com = new SqlCommand("Select Id, Title from Movie", con);
-                SqlDataAdapter da = new SqlDataAdapter(com);
-                DataSet ds = new DataSet();
-                da.Fill(ds);
-                inputDropDownList.DataTextField = ds.Tables[0].Columns["Title"].ToString();
-                inputDropDownList.DataValueField = ds.Tables[0].Columns["Id"].ToString();
-                inputDropDownList.DataSource = ds.Tables[0];
-                inputDropDownList.DataBind();
+                //SqlCommand com = new SqlCommand("Select Id, Title from Movie", con);
+                //SqlDataAdapter da = new SqlDataAdapter(com);
+                //DataSet ds = new DataSet();
+                //da.Fill(ds);
+                //inputDropDownList.DataTextField = ds.Tables[0].Columns["Title"].ToString();
+                //inputDropDownList.DataValueField = ds.Tables[0].Columns["Id"].ToString();
+                //inputDropDownList.DataSource = ds.Tables[0];
+                //inputDropDownList.DataBind();
+
+                List<MovieDTO> lisMovies = new List<MovieDTO>();
+                lisMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
+                foreach (MovieDTO item in lisMovies)
+                {
+                    inputDropDownList.DataTextField = item.Title;
+                    inputDropDownList.DataValueField = Convert.ToString(item.Id);
+                }
+
 
             }
         }

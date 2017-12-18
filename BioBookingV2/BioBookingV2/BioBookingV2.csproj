@@ -134,6 +134,7 @@
     <Content Include="Content\Images\*" />
     <Content Include="Content\Site.css" />
     <Content Include="CreateMovie.aspx" />
+    <Content Include="CreateScreening.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -174,6 +175,7 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="ShowScreenings.aspx" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -204,6 +206,13 @@
     <Compile Include="CreateMovie.aspx.designer.cs">
       <DependentUpon>CreateMovie.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CreateScreening.aspx.cs">
+      <DependentUpon>CreateScreening.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateScreening.aspx.designer.cs">
+      <DependentUpon>CreateScreening.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DAL\SQLConnector.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -229,6 +238,13 @@
       <DependentUpon>KKTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowScreenings.aspx.cs">
+      <DependentUpon>ShowScreenings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowScreenings.aspx.designer.cs">
+      <DependentUpon>ShowScreenings.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
