@@ -37,5 +37,5 @@
             </p>
         </div>
     </div>
-
+    <div><asp:Label ID="testLabel" runat="server"></asp:Label></div>
 </asp:Content>
