@@ -49,6 +49,18 @@ namespace BioBookingV2
         protected void SeedButton_Click(object sender, EventArgs e)
         {
             SQLConnector con = new SQLConnector();
+
+            //Henter alt ud fra respektive tabeller
+            List<MovieDTO> lisMovies = new List<MovieDTO>();
+            lisMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
+            List<ResourceDTO> lisResource = new List<ResourceDTO>();
+            lisResource = con.GetAll("Resource").Cast<ResourceDTO>().ToList();
+            List<TheaterDTO> lisTheater = new List<TheaterDTO>();
+            lisTheater = con.GetAll("Theater").Cast<TheaterDTO>().ToList();
+            List<ScreeningDTO> lisScreening = new List<ScreeningDTO>();
+            lisScreening = con.GetAll("Screening").Cast<ScreeningDTO>().ToList();
+
+            //Skaber objekter i respektive elementer
             MovieDTO movie2 = new MovieDTO()
             {
                 Title = "Title Only",
@@ -77,18 +89,20 @@ namespace BioBookingV2
                 EndDate = DateTime.Now.AddHours(3),
                 AvailableSeats = 40
             };
-            List<MovieDTO> lisMovies = new List<MovieDTO>();
-            lisMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
-            List<ResourceDTO> lisResource = new List<ResourceDTO>();
-            lisResource = con.GetAll("Resource").Cast<ResourceDTO>().ToList();
-            List<TheaterDTO> lisTheater = new List<TheaterDTO>();
-            lisTheater = con.GetAll("Theater").Cast<TheaterDTO>().ToList();
-            List<ScreeningDTO> lisScreening = new List<ScreeningDTO>();
-            lisScreening = con.GetAll("Screening").Cast<ScreeningDTO>().ToList();
             movie2 = (MovieDTO)con.CreateObject(movie2);
             resource = (ResourceDTO)con.CreateObject(resource);
             theater = (TheaterDTO)con.CreateObject(theater);
             screening = (ScreeningDTO)con.CreateObject(screening);
+
+            //Eksempel på hente alle screenings med MovieId = 3
+            List<ScreeningDTO> lisTestScreening = new List<ScreeningDTO>();
+            lisTestScreening = con.GetAll("Screening", "MovieId", "3", typeof(int)).Cast<ScreeningDTO>().ToList();
+
+            //Henter alle resources (brugere) med Employee = 1, dvs ansatte/admins
+            List<ResourceDTO> lisTestResource = new List<ResourceDTO>();
+            lisTestResource = con.GetAll("Resource", "Employee", "true", typeof(bool)).Cast<ResourceDTO>().ToList();
+
+            //Eksempel på updating af et objekt
             MovieDTO movie3 = new MovieDTO()
             {
                 Id = 5,
@@ -98,6 +112,8 @@ namespace BioBookingV2
                 Price = 1113.37M
             };
             movie3 = (MovieDTO)con.UpdateObject(movie3);
+
+            //Anden test
             TestLabel.Text = "ID for seeded movie: " + movie2.Id.ToString();
         }
     }
