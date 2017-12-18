@@ -80,6 +80,10 @@ namespace BioBookingV2.DAL
                                         TheaterDTO Theater = new TheaterDTO();
                                         ObjReturn = Theater;
                                         break;
+                                    case "MovieScreening":
+                                        MovieScreeningDTO MovieScreening = new MovieScreeningDTO();
+                                        ObjReturn = MovieScreening;
+                                        break;
                                     default:
                                         ObjReturn = null;
                                         break;
@@ -133,6 +137,10 @@ namespace BioBookingV2.DAL
                 case "Theater":
                     TheaterDTO Theater = new TheaterDTO();
                     ObjReturn = Theater;
+                    break;
+                case "MovieScreening":
+                    MovieScreeningDTO MovieScreening = new MovieScreeningDTO();
+                    ObjReturn = MovieScreening;
                     break;
                 default:
                     ObjReturn = null;

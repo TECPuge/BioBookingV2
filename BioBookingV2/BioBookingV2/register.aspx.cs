@@ -20,7 +20,6 @@ namespace BioBookingV2
 
         }
 
-
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -48,6 +47,7 @@ namespace BioBookingV2
         {
 
         }
+
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             // Open SQL connection
@@ -65,6 +65,7 @@ namespace BioBookingV2
                 LoginPassword = EncryptedPassword,
                 FirstName = Firstname.Text,
                 LastName = Lastname.Text,
+                Email = Email.Text
             };
             // Insert new movie into table
             NewResource = (ResourceDTO)(con.CreateObject(NewResource));
