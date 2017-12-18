@@ -17,7 +17,8 @@
         <p>
             &nbsp;</p>
         <p>
-            &nbsp;</p>
+            <asp:Label ID="Label5" runat="server"></asp:Label>
+        </p>
         <p>
             <asp:CheckBox ID="chkBoxRememberMe" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="Remember me" />
         </p>
