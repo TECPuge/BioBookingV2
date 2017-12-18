@@ -25,20 +25,14 @@ namespace BioBookingV2
             if (String.IsNullOrEmpty(InputTitle.Text))
             {
                 ErrorMessage = ErrorMessage + "\\nTitel skal udfyldes";
-                //Response.Write("<script>alert('');</script>");
-                //return;
             }
             if (!Decimal.TryParse(InputPrice.Text, out Price))
             {
                 ErrorMessage = ErrorMessage + "\\nBillet pris skal udfyldes";
-                //Response.Write("<script>alert('Billet pris skal være et tal.');</script>");
-                //return;
             }
             if (!FileUploadPoster.HasFile)
             {
                 ErrorMessage = ErrorMessage + "\\nBillede skal vælges";
-                //Response.Write("<script>alert('Billede skal uploades');</script>");
-                //return;
             }
             if (String.IsNullOrEmpty(InputTitle.Text) || InputTitle.Text.Length > 250)
             {
@@ -77,7 +71,7 @@ namespace BioBookingV2
                     {
                         Title = InputTitle.Text,
                         Description = InputDescription.Text,
-                        PosterFileName = (FileUploadPoster.HasFile ? ImageName : "NotMadeYet.png"),
+                        PosterFileName = ImageName,
                         Price = Price
                     };
                     // Insert new movie into table
@@ -99,7 +93,7 @@ namespace BioBookingV2
                 ".jpg",
                 ".png"
             };
-            // Check if file extension is allowed and save the file
+            // Check if file extension is allowed and try to save the file
             if (AllowedExtensions.Contains(FileExtension))
             {
                 try
