@@ -147,7 +147,9 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="KKTest.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="MovieReservation.aspx" />
+    <Content Include="register.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -223,6 +225,7 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="DTO\MovieDTO.cs" />
+    <Compile Include="DTO\MovieScreeningDTO.cs" />
     <Compile Include="DTO\ReservationDTO.cs" />
     <Compile Include="DTO\ResourceDTO.cs" />
     <Compile Include="DTO\ScreeningDTO.cs" />
@@ -238,6 +241,13 @@
     <Compile Include="KKTest.aspx.designer.cs">
       <DependentUpon>KKTest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MovieReservation.aspx.cs">
       <DependentUpon>MovieReservation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -246,6 +256,13 @@
       <DependentUpon>MovieReservation.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="register.aspx.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="register.aspx.designer.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ShowScreenings.aspx.cs">
       <DependentUpon>ShowScreenings.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
