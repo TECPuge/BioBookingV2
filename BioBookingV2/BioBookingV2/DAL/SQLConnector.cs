@@ -13,8 +13,14 @@ namespace BioBookingV2.DAL
     {
         private string ConfigConnectionString = ConfigurationManager.ConnectionStrings["BioBookingDB"].ConnectionString;
 
+        public void test()
+        {
+            List<object> lisTest = new List<object>();
+            lisTest = GetAll("Tablename", "Id", "2");
+        }
         //Henter alt fra et tablenavn
-        public List<object> GetAll(string TableName)
+        public List<object> GetAll(string TableName, string ColumnToCheckName = null, object ObjectToMatch = null, string PropertyName = null)
+        public List<object> GetAll(string TableName, string ColumnToCheckName = null, string ValueToMatch = null, Type type = null)
         {
             List<object> LisReturn = new List<object>();
             try
