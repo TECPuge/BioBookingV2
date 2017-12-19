@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using BioBookingV2.DAL;
 using BioBookingV2.DTO;
 using System.Reflection;
+using BioBookingV2.Utility;
+
 namespace BioBookingV2
 {
     public partial class KKTest : System.Web.UI.Page
@@ -124,6 +126,12 @@ namespace BioBookingV2
             }
             //Anden test
             TestLabel.Text = tempString;
+        }
+
+        protected void MailButton_Click(object sender, EventArgs e)
+        {
+            Mailor mailor = new Mailor();
+            mailor.SendMail("Kristian_kamp@hotmail.com");
         }
     }
 }
