@@ -53,6 +53,7 @@ namespace BioBookingV2.DAL
                         {
                             while (reader.Read())
                             {
+                                bool Skip = false;
                                 object ObjReturn = new object();
                                 switch (TableName)
                                 {
@@ -86,9 +87,10 @@ namespace BioBookingV2.DAL
                                         break;
                                     default:
                                         ObjReturn = null;
+                                        Skip = true;
                                         break;
                                 }
-                                if (ObjReturn != null)
+                                if (!Skip)
                                 {
                                     //Løber igennem properties og sætter property til værdien den finder i rækkens felt med samme kolonnenavn som propertyname
                                     foreach (PropertyInfo pi in ObjReturn.GetType().GetProperties())
