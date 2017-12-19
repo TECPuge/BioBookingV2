@@ -35,6 +35,9 @@
             <br />
 
             <asp:Button ID="ScreeningCreate" runat="server" OnClick="ScreeningCreate_Click" Text="Create Screening" />
+
+            <p>↓ Created Screening ↓</p>
+            <p><asp:Label ID="VisVisningLabel" runat="server" /></p>
             
         </div>
     </form>

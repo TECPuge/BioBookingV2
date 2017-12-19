@@ -28,8 +28,6 @@ namespace BioBookingV2
                 MovieDropDownList.DataSource = lisMovies;
                 MovieDropDownList.DataBind();
 
-                Response.Write("<script>alert('test');</script>");
-
                 List<TheaterDTO> lisTheaters = new List<TheaterDTO>();
                 lisTheaters = con.GetAll("Theater").Cast<TheaterDTO>().ToList();
 
@@ -55,8 +53,8 @@ namespace BioBookingV2
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
             string SeatsTemp = string.Empty;
-            SQLConnector sqlCon = new SQLConnector();
-            object obj = sqlCon.Get("Theater", Convert.ToInt32(TheaterDropDownList.Text));
+            SQLConnector con = new SQLConnector();
+            object obj = con.Get("Theater", Convert.ToInt32(TheaterDropDownList.Text));
             foreach (PropertyInfo pi in obj.GetType().GetProperties())
             {
                 if (pi.Name == "NumberOfSeats")
@@ -75,12 +73,19 @@ namespace BioBookingV2
             {
                 MovieId = Convert.ToInt32(MovieDropDownList.Text),
                 TheaterId = Convert.ToInt32(TheaterDropDownList.Text),
-                StartDate = Convert.ToDateTime(InputStartDate.Value),
-                EndDate = Convert.ToDateTime(InputEndDate.Value),
-                AvailableSeats = Convert.ToInt32(Seats.Text)
+                StartDate = Convert.ToDateTime(InputStartDate.Value.ToString()),
+                EndDate = Convert.ToDateTime(InputEndDate.Value.ToString()),
+                AvailableSeats = Convert.ToInt32(InputSeats.Value)
             };
             newScreening = (ScreeningDTO)(con.CreateObject(newScreening));
 
+            string strTemp = string.Empty;
+            object obj = newScreening;
+            foreach (PropertyInfo pi in obj.GetType().GetProperties())
+            {
+                strTemp += pi.Name + ": " + pi.GetValue(obj) + "<br />";
+            }
+            VisVisningLabel.Text = strTemp;
         }
     }
 }

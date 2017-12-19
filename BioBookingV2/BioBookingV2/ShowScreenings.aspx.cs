@@ -37,12 +37,12 @@ namespace BioBookingV2
 
                 List<MovieDTO> lisMovies = new List<MovieDTO>();
                 lisMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
-                                
+
                 inputDropDownList.DataTextField = "Title";
-                inputDropDownList.DataValueField = "Id";                
+                inputDropDownList.DataValueField = "Id";
                 inputDropDownList.DataSource = lisMovies;
                 inputDropDownList.DataBind();
-                
+
             }
         }
 
@@ -53,10 +53,32 @@ namespace BioBookingV2
             List<ScreeningDTO> lisScreening = new List<ScreeningDTO>();
             lisScreening = con.GetAll("Screening", "MovieId", inputDropDownList.Text, typeof(int)).Cast<ScreeningDTO>().ToList();
 
-            foreach (var item in lisScreening)
+            foreach (ScreeningDTO Screening in lisScreening)
             {
-                 
+                object obj = con.Get("Movie", Screening.MovieId);
+                foreach (PropertyInfo pi in obj.GetType().GetProperties())
+                {
+                    if (pi.Name == "Title")
+                    {
+                        var movie = pi.GetValue(obj);
+                    }
+                }
+
+                object objT = con.Get("Theater", Screening.TheaterId);
+                foreach (PropertyInfo pi in obj.GetType().GetProperties())
+                {
+                    if (pi.Name == "Name")
+                    {
+                        var Theater = pi.GetValue(obj);
+                    }
+                }
+
+                var SDate = Screening.StartDate;
+                var EDate = Screening.EndDate;
+                var Seats = Screening.AvailableSeats;
+
             }
+
         }
     }
 }
