@@ -7,11 +7,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using BioBookingV2.DAL;
-using BioBookingV2.DTO;
 
 namespace BioBookingV2
 {
@@ -38,26 +37,26 @@ namespace BioBookingV2
 
                 List<MovieDTO> lisMovies = new List<MovieDTO>();
                 lisMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
-                foreach (MovieDTO item in lisMovies)
-                {
-                    inputDropDownList.DataTextField = item.Title;
-                    inputDropDownList.DataValueField = Convert.ToString(item.Id);
-                }
-
-
+                                
+                inputDropDownList.DataTextField = "Title";
+                inputDropDownList.DataValueField = "Id";                
+                inputDropDownList.DataSource = lisMovies;
+                inputDropDownList.DataBind();
+                
             }
         }
 
         protected void VisningerButton_Click(object sender, EventArgs e)
         {
-            string strTemp = string.Empty;
             SQLConnector con = new SQLConnector();
-            object obj = con.Get("Movie", Convert.ToInt32(inputDropDownList.Text));
-            foreach (PropertyInfo pi in obj.GetType().GetProperties())
+
+            List<ScreeningDTO> lisScreening = new List<ScreeningDTO>();
+            lisScreening = con.GetAll("Screening", "MovieId", inputDropDownList.Text, typeof(int)).Cast<ScreeningDTO>().ToList();
+
+            foreach (var item in lisScreening)
             {
-                strTemp += pi.Name + ": " + pi.GetValue(obj) + "<br />";
+                 
             }
-            VisVisningerLabel.Text = strTemp;
         }
     }
 }

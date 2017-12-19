@@ -73,7 +73,7 @@ namespace BioBookingV2 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText InputStartDate;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl InputStartDate;
         
         /// <summary>
         /// CheckStartDate control.
@@ -100,7 +100,7 @@ namespace BioBookingV2 {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText InputEndDate;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl InputEndDate;
         
         /// <summary>
         /// CheckEndDate control.

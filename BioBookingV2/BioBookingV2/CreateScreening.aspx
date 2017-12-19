@@ -14,16 +14,17 @@
                 </asp:DropDownList>
             <br />
             <asp:Label ID="Label1" Text="Select Theater:" runat="server"></asp:Label>
-                <asp:DropDownList ID="TheaterDropDownList" runat="server">
+                <asp:DropDownList ID="TheaterDropDownList" runat="server" AutoPostBack="true"
+                    onselectedindexchanged="SelectedIndexChanged">
                 </asp:DropDownList>
             <br />
             <asp:Label ID="LabelStartDate" runat="server" Text="Start Time:"></asp:Label>
-                <input id="InputStartDate" type="text" runat="server" />
+                <input id="InputStartDate" type="datetime-local" runat="server" />
                 <asp:RequiredFieldValidator ID="CheckStartDate" runat="server" ControlToValidate="InputStartDate"
                     ForeColor="Red" ErrorMessage="Start date and time are required!"></asp:RequiredFieldValidator>
             <br/>
             <asp:Label ID="LabelEndDate" runat="server" Text="End Time:"></asp:Label>
-                <input id="InputEndDate" type="text" runat="server" />
+                <input id="InputEndDate" type="datetime-local" runat="server" />
                 <asp:RequiredFieldValidator ID="CheckEndDate" runat="server" ControlToValidate="InputEndDate"
                     ForeColor="Red" ErrorMessage="End date and time are required!"></asp:RequiredFieldValidator>
             <br />
