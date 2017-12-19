@@ -74,7 +74,8 @@ namespace BioBookingV2
                 LoginPassword = "Kodeord123",
                 FirstName = "Bo",
                 LastName = "Nielsen",
-                Employee = false
+                Employee = false,
+                Email = "TestMail@mail.dk"
             };
             TheaterDTO theater = new TheaterDTO()
             {
@@ -83,7 +84,7 @@ namespace BioBookingV2
             };
             ScreeningDTO screening = new ScreeningDTO()
             {
-                MovieId = 2,
+                MovieId = 1,
                 TheaterId = 1,
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now.AddHours(3),
@@ -105,16 +106,24 @@ namespace BioBookingV2
             //Eksempel på updating af et objekt
             MovieDTO movie3 = new MovieDTO()
             {
-                Id = 5,
+                Id = 1,
                 Title = "UPDATED Title Only",
                 Description = "UPDATED Description Only",
                 PosterFileName = "UPDATED PosterFileName Only",
                 Price = 1113.37M
             };
             movie3 = (MovieDTO)con.UpdateObject(movie3);
+            string tempString = string.Empty;
 
+            foreach (var item in lisMovies)
+            {
+                foreach (var  pi in item.GetType().GetProperties())
+                {
+                    tempString += pi.Name + ": " + Convert.ToString(pi.GetValue(item)) + "<br />";
+                }
+            }
             //Anden test
-            TestLabel.Text = "ID for seeded movie: " + movie2.Id.ToString();
+            TestLabel.Text = tempString;
         }
     }
 }

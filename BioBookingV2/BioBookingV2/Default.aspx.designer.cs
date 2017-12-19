@@ -13,12 +13,12 @@ namespace BioBookingV2 {
     public partial class _Default {
         
         /// <summary>
-        /// testLabel control.
+        /// BodyDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label testLabel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BodyDiv;
     }
 }

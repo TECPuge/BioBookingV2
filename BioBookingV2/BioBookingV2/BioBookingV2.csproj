@@ -131,7 +131,6 @@
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\Images\*" />
     <Content Include="Content\Site.css" />
     <Content Include="CreateMovie.aspx" />
     <Content Include="CreateScreening.aspx" />
@@ -294,6 +293,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
