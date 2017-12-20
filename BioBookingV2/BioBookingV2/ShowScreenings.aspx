@@ -18,7 +18,6 @@
             </p>
         </div>
     </form>
-    <div id="MovieBody" runat="server" style="padding-top:20px"></div>
-    <div id="ScreeningBody" runat="server"></div>
+        <div id="MovieBody" runat="server" style="padding-top: 20px"></div>
 </body>
 </html>
