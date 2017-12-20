@@ -77,7 +77,7 @@ namespace BioBookingV2
                 return;
             }
             // Initialize variables
-            int ScreeningId = Convert.ToInt32(Request.QueryString["ScreeningId"]);
+            int ScreeningId = Convert.ToInt32(Request.QueryString["Id"]);
             int UserId = 0;
             List<ResourceDTO> Resource = new List<ResourceDTO>();
             ResourceDTO resourceSingle = new ResourceDTO();
