@@ -53,12 +53,9 @@ namespace BioBookingV2
             // Open SQL connection
             SQLConnector con = new SQLConnector();
 
-
+            
             string EncryptedPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(txtPassword.Text, "SHA1");
-            // Create Movie object to insert
-
             ResourceDTO NewResource = new ResourceDTO
-
             {
 
                 LoginName = txtUserName.Text,
@@ -68,9 +65,18 @@ namespace BioBookingV2
                 Email = Email.Text
             };
             // Insert new movie into table
-            NewResource = (ResourceDTO)(con.CreateObject(NewResource));
-            Response.Redirect("default.aspx");
-        
+
+            List<ResourceDTO> ExistingUser = new List<ResourceDTO>();
+            ExistingUser = con.GetAll("Resource", "LoginName", NewResource.LoginName, typeof(string)).Cast<ResourceDTO>().ToList();
+            if (ExistingUser.Count == 0)
+            {
+                NewResource = (ResourceDTO)(con.CreateObject(NewResource));
+                Response.Redirect("default.aspx"); 
+            }
+            else
+            {
+                lblMessage.Text = "Login name eksisterer allerede.";
+            }
         }
     }
 }

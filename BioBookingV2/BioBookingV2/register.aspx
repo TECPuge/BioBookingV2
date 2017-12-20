@@ -1,20 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="BioBookingV2.WebForm1" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="register.aspx.cs" Inherits="BioBookingV2.WebForm1" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-    <style type="text/css">
-        .auto-style1 {
-            height: 29px;
-        }
-    </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
         <div>
-
             <div style="font-family: Arial">
                 <table style="border: 1px solid black">
                     <tr>
@@ -109,6 +96,4 @@
                 </table>
             </div>
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>

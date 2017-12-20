@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using BioBookingV2.DTO;
 using BioBookingV2.DAL;
+using BioBookingV2.Utility;
 
 namespace BioBookingV2
 {
@@ -15,7 +16,11 @@ namespace BioBookingV2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ValidateEmployee val = new ValidateEmployee();
+            if (!val.IsEmployee(Context.User.Identity.Name))
+            {
+                Response.Redirect("default.aspx");
+            }
         }
         protected void ButtonCreate_Click(object sender, EventArgs e)
         {

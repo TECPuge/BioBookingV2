@@ -1,5 +1,6 @@
 ﻿using BioBookingV2.DAL;
 using BioBookingV2.DTO;
+using BioBookingV2.Utility;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,7 +16,11 @@ namespace BioBookingV2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ValidateEmployee val = new ValidateEmployee();
+            if (!val.IsEmployee(Context.User.Identity.Name))
+            {
+                Response.Redirect("default.aspx");
+            }
 
             //Create Dynamic drop down lists for Movie and Screening
             SQLConnector con = new SQLConnector();

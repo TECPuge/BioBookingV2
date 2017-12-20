@@ -15,6 +15,11 @@ namespace BioBookingV2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ValidateEmployee val = new ValidateEmployee();
+            if (!val.IsEmployee(Context.User.Identity.Name))
+            {
+                Response.Redirect("default.aspx");
+            }
             ControlLabel.Text = "Control";
             //SQLConnector con = new SQLConnector();
             //MovieDTO movie1 = new MovieDTO();
