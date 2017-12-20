@@ -50,8 +50,8 @@ namespace BioBookingV2
                     HtmlGenericControl liViewScreening = new HtmlGenericControl("LI");
                     navLogin.Controls.Add(liViewScreening);
                     HtmlGenericControl aViewScreening = new HtmlGenericControl("A");
-                    aCreateScreening.Attributes["href"] = "ViewReservations";
-                    aCreateScreening.InnerText = "Se reservationer";
+                    aViewScreening.Attributes["href"] = "ViewReservations";
+                    aViewScreening.InnerText = "Se reservationer";
                     liViewScreening.Controls.Add(aViewScreening);
 
                 }

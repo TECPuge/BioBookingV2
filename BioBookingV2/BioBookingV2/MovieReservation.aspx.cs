@@ -142,7 +142,7 @@ namespace BioBookingV2
                 con.CreateObject(Reservation);
             }
             // Redirect to same page
-            string strMessage = string.Format("Hej {0}, tak for din bestilling!\r\n\r\nDu har reserveret {1} billet(er) til filmen {2}\r\n\r\nMvh.\r\nTEC BioBooking!", resourceSingle.FirstName, ConfirmedSeats.Count().ToString(), MovieScreeningSingle.MovieTitle);
+            string strMessage = string.Format("Hej {0}, tak for din bestilling!\r\n\r\nDu har reserveret {1} {3} til filmen {2}\r\n\r\nMvh.\r\nTEC BioBooking!", resourceSingle.FirstName, ConfirmedSeats.Count().ToString(), MovieScreeningSingle.MovieTitle, (ConfirmedSeats.Count() == 1 ? "billet" : "billetter"));
             string strSubject = string.Format("Tak for din bestilling");
             Mailor mailor = new Mailor();
             mailor.SendMail(resourceSingle.Email, strSubject, strMessage);
