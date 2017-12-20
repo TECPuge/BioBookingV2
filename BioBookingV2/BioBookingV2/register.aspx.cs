@@ -10,6 +10,7 @@ using BioBookingV2.DAL;
 using BioBookingV2.DTO;
 using System.Data;
 using System.Web.Security;
+using BioBookingV2.Utility;
 
 namespace BioBookingV2
 {
@@ -71,6 +72,10 @@ namespace BioBookingV2
             if (ExistingUser.Count == 0)
             {
                 NewResource = (ResourceDTO)(con.CreateObject(NewResource));
+                string strMessage = string.Format("Hej {0},\r\n\r\nDin bruger \"{1}\" er hermed oprettet i vores system! Vi håber du får set mange film hos os!\r\n\r\nMvh.\r\nTEC BioBooking!", NewResource.FirstName, NewResource.LoginName);
+                string strSubject = string.Format("Bruger {0} oprettet!", NewResource.LoginName);
+                Mailor mailor = new Mailor();
+                mailor.SendMail(NewResource.Email, strSubject, strMessage);
                 Response.Redirect("default.aspx"); 
             }
             else
