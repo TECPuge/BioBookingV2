@@ -10,6 +10,8 @@ namespace BioBookingV2.DTO
         public int MovieId { get; set; }
         public int ScreeningId { get; set; }
         public int SeatId { get; set; }
+        public int SeatRow { get; set; }
+        public int SeatNumber { get; set; }
         public string MovieTitle { get; set; }
         public string MovieDescription { get; set; }
         public string PosterFileName { get; set; }
