@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BioBookingV2.DAL;
 using BioBookingV2.DTO;
+using BioBookingV2.Utility;
+
 namespace BioBookingV2
 {
     public partial class MovieReservation : System.Web.UI.Page
@@ -14,7 +16,7 @@ namespace BioBookingV2
         {
             if(Request.QueryString["Done"] == "1")
             {
-                ReservationConfirmed.Text = "Tak for din bestilling - bekræftelse er sent per mail";
+                RaiseAlert("Tak for din bestilling - Bekræftelse er sendt til din mail");
             }
             int ScreeningId = Convert.ToInt32(Request.QueryString["Id"]);
             SQLConnector con = new SQLConnector();
@@ -33,11 +35,7 @@ namespace BioBookingV2
 
             // Initialize page with content from requested movie
             InitPageContent(MovieScreeningSingle);
-            //// Initialize drop down here as we have the list of moviescreenings
-            //for (int i = 0; i <= MovieScreening.Count(x => x.AvailableStatusId == 0); i++)
-            //{
-            //    inputDropDownList.Items.Insert(i, (i + 1).ToString());
-            //}
+            
             // Draw dynamic html for reservation 
             foreach (var SeatRow in MovieScreening.Select(x => x.SeatRow).Distinct())
             {
@@ -66,10 +64,8 @@ namespace BioBookingV2
 
             MoviePoster.ImageUrl = "/Content/Images/" + MovieScreening.PosterFileName;
             MovieTitle.Text = MovieScreening.MovieTitle;
-            MovieStartDate.Text = MovieScreening.StartDate.ToLongDateString();
-            MovieEndDate.Text = MovieScreening.EndDate.ToLongDateString();
-            MovieAvailableSeat.Text = MovieScreening.AvailableSeats.ToString();
-
+            MovieStartDate.Text = MovieScreening.StartDate.ToString();
+            MovieEndDate.Text = MovieScreening.EndDate.ToString(); ;
         }
 
         protected void ReservationConfirm_Click(object sender, EventArgs e)
@@ -146,6 +142,10 @@ namespace BioBookingV2
                 con.CreateObject(Reservation);
             }
             // Redirect to same page
+            string strMessage = string.Format("Hej {0}, tak for din bestilling!\r\n\r\nDu har reserveret {1} billet(er) til filmen {2}\r\n\r\nMvh.\r\nTEC BioBooking!", resourceSingle.FirstName, ConfirmedSeats.Count().ToString(), MovieScreeningSingle.MovieTitle);
+            string strSubject = string.Format("Tak for din bestilling");
+            Mailor mailor = new Mailor();
+            mailor.SendMail(resourceSingle.Email, strSubject, strMessage);
             Response.Redirect("/MovieReservation?Id=" + ScreeningId.ToString() + "&Done=1");
         }
         public void RaiseAlert(string Message)

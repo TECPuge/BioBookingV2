@@ -17,7 +17,7 @@
     <div class="well well-lg">
         <div class="row">
             <div class="col-sm-4">
-                <asp:Image ID="MoviePoster" runat="server" Height="450" Width="300"/>
+                <asp:Image ID="MoviePoster" runat="server" Height="450" Width="300" />
             </div>
             <div class="col-sm-2">
                 <h2>
@@ -31,17 +31,10 @@
                     Slut tidspunkt:
                     <asp:Label ID="MovieEndDate" runat="server"></asp:Label>
                 </p>
-                <p>
-                    Ledige sæder:
-                    <asp:Label ID="MovieAvailableSeat" runat="server"></asp:Label>
-                </p>
             </div>
             <div class="col-sm-6 pull-right">
                 <div class="well well-lg black">
-                    <p><span class="glyphicon glyphicon-print optaget"></span>= Optaget</p>
-                    <p><span class="glyphicon glyphicon-print ledig"></span>= Ledige</p>
-                    <p><span class="glyphicon glyphicon-print highlight"></span>= Dine billetter </p>
-                    <asp:Table runat="server" ID="Reservation"></asp:Table>
+                    <asp:Table  class="" runat="server" ID="Reservation"></asp:Table>
                     <div class="TheaterScreen">
                         <div class="screen">
                         </div>

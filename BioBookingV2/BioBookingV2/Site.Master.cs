@@ -46,7 +46,14 @@ namespace BioBookingV2
                     aCreateScreening.InnerText = "Opret filmvisning";
                     liCreateScreening.Controls.Add(aCreateScreening);
 
-                    //To Do Se reservationer
+                    //ViewScreening
+                    HtmlGenericControl liViewScreening = new HtmlGenericControl("LI");
+                    navLogin.Controls.Add(liViewScreening);
+                    HtmlGenericControl aViewScreening = new HtmlGenericControl("A");
+                    aCreateScreening.Attributes["href"] = "ViewReservations";
+                    aCreateScreening.InnerText = "Se reservationer";
+                    liViewScreening.Controls.Add(aViewScreening);
+
                 }
             }
         }

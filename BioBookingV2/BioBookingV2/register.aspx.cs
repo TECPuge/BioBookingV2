@@ -21,34 +21,6 @@ namespace BioBookingV2
 
         }
 
-        protected void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void TextBox2_TextChanged(object sender, EventArgs e)
-        {
-        }
-        protected void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void txtConfirmPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void txtUserName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnRegister_Click(object sender, EventArgs e)
         {
             // Open SQL connection
@@ -65,8 +37,8 @@ namespace BioBookingV2
                 LastName = Lastname.Text,
                 Email = Email.Text
             };
-            // Insert new movie into table
-
+						
+            // Insert User into table
             List<ResourceDTO> ExistingUser = new List<ResourceDTO>();
             ExistingUser = con.GetAll("Resource", "LoginName", NewResource.LoginName, typeof(string)).Cast<ResourceDTO>().ToList();
             if (ExistingUser.Count == 0)
@@ -80,7 +52,7 @@ namespace BioBookingV2
             }
             else
             {
-                lblMessage.Text = "Login name eksisterer allerede.";
+                lblMessage.Text = "Brugernavn er optaget - prøv igen.";
             }
         }
     }
