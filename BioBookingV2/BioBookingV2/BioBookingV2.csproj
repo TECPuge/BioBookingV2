@@ -179,8 +179,11 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="ShowScreenings.aspx" />
     <Content Include="Site.Master" />
+    <Content Include="ViewReservations.aspx" />
     <Content Include="ViewSwitcher.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
@@ -227,6 +230,7 @@
     <Compile Include="DTO\MovieScreeningDTO.cs" />
     <Compile Include="DTO\ReservationDTO.cs" />
     <Compile Include="DTO\ResourceDTO.cs" />
+    <Compile Include="DTO\ResourceScreeningDTO.cs" />
     <Compile Include="DTO\ScreeningDTO.cs" />
     <Compile Include="DTO\SeatDTO.cs" />
     <Compile Include="DTO\TheaterDTO.cs" />
@@ -285,6 +289,13 @@
     </Compile>
     <Compile Include="Utility\Mailor.cs" />
     <Compile Include="Utility\ValidateEmployee.cs" />
+    <Compile Include="ViewReservations.aspx.cs">
+      <DependentUpon>ViewReservations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ViewReservations.aspx.designer.cs">
+      <DependentUpon>ViewReservations.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

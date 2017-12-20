@@ -85,6 +85,10 @@ namespace BioBookingV2.DAL
                                         MovieScreeningDTO MovieScreening = new MovieScreeningDTO();
                                         ObjReturn = MovieScreening;
                                         break;
+                                    case "ResourceScreening":
+                                        ResourceScreeningDTO ResourceScreening = new ResourceScreeningDTO();
+                                        ObjReturn = ResourceScreening;
+                                        break;
                                     default:
                                         ObjReturn = null;
                                         Skip = true;
