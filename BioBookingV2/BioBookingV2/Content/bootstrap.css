@@ -6850,3 +6850,20 @@ td.visible-print {
     color:white;
     text-align:center;
 }
+
+.test{
+    height:auto;
+    width:auto;
+    display:inline-block;
+    margin-right:20px;  
+}
+
+.navbar{
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.white {
+    padding-top:15px;
+    color: white;
+    text-decoration:underline;    
+}

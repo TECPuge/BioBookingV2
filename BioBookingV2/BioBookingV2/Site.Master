@@ -52,7 +52,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav" id="navLogin" runat="server">
                         <li><asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" LogoutPageUrl="~/"/></li>
-                        <li><a runat="server" href="~/register">Register</a></li>
+                        <li class="white"><asp:LoginName class="white" runat="server"/></li>
                     </ul>
                 </div>
             </div>
@@ -61,9 +61,6 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
         </div>
 
     </form>
