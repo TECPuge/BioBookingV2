@@ -10,40 +10,12 @@ using BioBookingV2.DAL;
 using BioBookingV2.DTO;
 using System.Data;
 using System.Web.Security;
-
+using BioBookingV2.Utility;
 namespace BioBookingV2
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void TextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void TextBox2_TextChanged(object sender, EventArgs e)
-        {
-        }
-        protected void txtEmail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void txtConfirmPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void txtPassword_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void txtUserName_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -71,11 +43,15 @@ namespace BioBookingV2
             if (ExistingUser.Count == 0)
             {
                 NewResource = (ResourceDTO)(con.CreateObject(NewResource));
+                string strMessage = string.Format("Hej {0},\r\n\r\nDin bruger \"{1}\" er hermed oprettet i vores system! Vi håber du får set mange film hos os!\r\n\r\nMvh.\r\nTEC BioBooking!", NewResource.FirstName, NewResource.LoginName);
+                string strSubject = string.Format("Bruger {0} oprettet!", NewResource.LoginName);
+                Mailor mailor = new Mailor();
+                mailor.SendMail(NewResource.Email, strSubject, strMessage);
                 Response.Redirect("default.aspx"); 
             }
             else
             {
-                lblMessage.Text = "Login name eksisterer allerede.";
+                lblMessage.Text = "Brugernavn er optaget - prøv igen.";
             }
         }
     }

@@ -8,7 +8,7 @@
             <div class="col-md-6 col-md-offset-3">
                 <div class="well well-sm">
                     <!-- <form class="form-horizontal" method="post"> -->
-                    <legend class="text-center">Login</legend>
+                    <legend class="text-center">Log in</legend>
                     <div class="Empty_Space"></div>
                     <fieldset>
                         <!-- Brugernavn input-->
@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="message"></label>
                             <div class="col-md-9">
-                                <asp:CheckBox ID="chkBoxRememberMe" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="Remember me" />
+                                <asp:CheckBox ID="chkBoxRememberMe" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" Text="Husk mig" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -45,8 +45,8 @@
                         <!-- Form actions -->
                             <div class="row">
                                 <div class="col test pull-right">
-                                   <asp:LinkButton ID="Button2" runat="server" class="btn btn-primary btn-lg" href="/register" Text="Opret ny"></asp:LinkButton>
-                                    <asp:Button ID="Button1" runat="server" type="submit" class="btn btn-primary btn-lg" OnClick="Button1_Click" Text="Login"></asp:Button>
+                                   <asp:LinkButton ID="Button2" runat="server" class="btn btn-primary btn-lg" href="/register" Text="Opret ny bruger"></asp:LinkButton>
+                                    <asp:Button ID="Button1" runat="server" type="submit" class="btn btn-primary btn-lg" OnClick="Button1_Click" Text="Log in"></asp:Button>
                                 </div>
 
 

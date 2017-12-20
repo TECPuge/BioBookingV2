@@ -6867,3 +6867,6 @@ td.visible-print {
     color: white;
     text-decoration:underline;    
 }
+.leftpadding {
+    padding-left:20px;
+}
