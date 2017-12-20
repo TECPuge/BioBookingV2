@@ -17,7 +17,7 @@
     <div class="well well-lg">
         <div class="row">
             <div class="col-sm-4">
-                <asp:Image ID="MoviePoster" runat="server" />
+                <asp:Image ID="MoviePoster" runat="server" Height="450" Width="300"/>
             </div>
             <div class="col-sm-2">
                 <h2>
@@ -49,11 +49,11 @@
                     </div>
                 </div>
                 <asp:Button runat="server" type="submit" class="btn btn-primary btn-lg pull-right" OnClick="ReservationConfirm_Click" Text="Bestil"></asp:Button>
-
             </div>
         </div>
     </div>
     <asp:HiddenField ID="ChosenSeatString" runat="server" />
+    <asp:Label ID="ReservationConfirmed" runat="server"></asp:Label>
     <!-- Script til at vælge sæder-->
     <script type="text/javascript">
         var ChosenSeats = [];
