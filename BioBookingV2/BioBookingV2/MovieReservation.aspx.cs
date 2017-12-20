@@ -12,6 +12,10 @@ namespace BioBookingV2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Request.QueryString["Done"] == "1")
+            {
+                ReservationConfirmed.Text = "Tak for din bestilling - bekræftelse er sent per mail";
+            }
             int ScreeningId = Convert.ToInt32(Request.QueryString["Id"]);
             SQLConnector con = new SQLConnector();
             List<MovieScreeningDTO> MovieScreening = new List<MovieScreeningDTO>();
@@ -141,6 +145,8 @@ namespace BioBookingV2
                 // Create screening
                 con.CreateObject(Reservation);
             }
+            // Redirect to same page
+            Response.Redirect("/MovieReservation?Id=" + ScreeningId.ToString() + "&Done=1");
         }
         public void RaiseAlert(string Message)
         {
