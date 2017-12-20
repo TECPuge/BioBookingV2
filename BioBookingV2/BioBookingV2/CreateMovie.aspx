@@ -15,6 +15,7 @@
                             <label class="col-md-3 control-label" for="name">Titel</label>
                             <div class="col-md-9">
                                 <asp:TextBox ID="InputTitle" runat="server" class="form-control" placeholder="Sharknado 2"></asp:TextBox>
+                                <div class="Empty_Space"></div>
                             </div>
                         </div>
 
@@ -23,6 +24,7 @@
                             <label class="col-md-3 control-label" for="email">Billet pris</label>
                             <div class="col-md-9">
                                 <asp:TextBox runat="server" ID="InputPrice" name="InputPrice" type="text" placeholder="kr. 50" class="form-control"></asp:TextBox>
+                                <div class="Empty_Space"></div>
                             </div>
                         </div>
 
@@ -31,6 +33,7 @@
                             <label class="col-md-3 control-label" for="message">Beskrivelse</label>
                             <div class="col-md-9">
                                 <asp:TextBox runat="server" class="form-control" ID="InputDescription" name="InputDescription" placeholder="Fin and April are on their way to New York City, until a category seven hurricane spawns heavy rain, storm surges, and deadly Sharknadoes..."></asp:TextBox>
+                                <div class="Empty_Space"></div>
                             </div>
                         </div>
 
@@ -39,6 +42,7 @@
                             <label class="col-md-3 control-label" for="message">Upload billede</label>
                             <div class="col-md-9">
                                 <asp:FileUpload ID="FileUploadPoster" runat="server" />
+                                <div class="Empty_Space"></div>
                             </div>
                         </div>
 
