@@ -42,11 +42,12 @@ namespace BioBookingV2
                 TheaterDropDownList.DataValueField = "Id";
                 TheaterDropDownList.DataSource = lisTheaters;
                 TheaterDropDownList.DataBind();
+                TheaterDropDownList.SelectedIndex = 0;
 
                 //Give Number Of Seats textbox value from DB matching the Theater selected in drop down.
                 string SeatsTemp = string.Empty;
                 SQLConnector sqlCon = new SQLConnector();
-                object obj = sqlCon.Get("Theater", Convert.ToInt32(MovieDropDownList.Text));
+                object obj = sqlCon.Get("Theater", Convert.ToInt32(TheaterDropDownList.Text));
                 foreach (PropertyInfo pi in obj.GetType().GetProperties())
                 {
                     if (pi.Name == "NumberOfSeats")
