@@ -1,14 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CreateScreening.aspx.cs" Inherits="BioBookingV2.CreateScreening" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CreateScreening.aspx.cs" Inherits="BioBookingV2.CreateScreening" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+        <div id="CScreeningBody" runat="server" style="padding-top: 20px">
             <asp:Label ID="staticLabel" Text="Vælg Film:" runat="server"></asp:Label>
                 <asp:DropDownList ID="MovieDropDownList" runat="server">
                 </asp:DropDownList>
@@ -36,10 +29,7 @@
 
             <asp:Button ID="ScreeningCreate" runat="server" OnClick="ScreeningCreate_Click" Text="Opret filmvisning" />
 
-            <p>↓ Oprettet filmvisning ↓</p>
             <p><asp:Label ID="VisVisningLabel" runat="server" /></p>
             
         </div>
-    </form>
-</body>
-</html>
+</asp:Content>

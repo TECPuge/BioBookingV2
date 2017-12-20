@@ -16,6 +16,8 @@ namespace BioBookingV2
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+            //Create Dynamic drop down lists for Movie and Screening
             SQLConnector con = new SQLConnector();
 
             if (!Page.IsPostBack)
@@ -36,6 +38,7 @@ namespace BioBookingV2
                 TheaterDropDownList.DataSource = lisTheaters;
                 TheaterDropDownList.DataBind();
 
+                //Give Number Of Seats textbox value from DB matching the Theater selected in drop down.
                 string SeatsTemp = string.Empty;
                 SQLConnector sqlCon = new SQLConnector();
                 object obj = sqlCon.Get("Theater", Convert.ToInt32(MovieDropDownList.Text));
@@ -52,6 +55,7 @@ namespace BioBookingV2
 
         protected void SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Update Number of Seats when value is selected in drop down
             string SeatsTemp = string.Empty;
             SQLConnector con = new SQLConnector();
             object obj = con.Get("Theater", Convert.ToInt32(TheaterDropDownList.Text));
@@ -68,6 +72,7 @@ namespace BioBookingV2
         protected void ScreeningCreate_Click(object sender, EventArgs e)
         {
 
+            //Create Screening in DB
             SQLConnector con = new SQLConnector();
             ScreeningDTO newScreening = new ScreeningDTO
             {
@@ -79,6 +84,7 @@ namespace BioBookingV2
             };
             newScreening = (ScreeningDTO)(con.CreateObject(newScreening));
 
+            //Show the Created Screening on site.
             string strTemp = string.Empty;
             object obj = newScreening;
             foreach (PropertyInfo pi in obj.GetType().GetProperties())
