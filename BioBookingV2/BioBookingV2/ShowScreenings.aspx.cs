@@ -1,6 +1,7 @@
 ﻿using BioBookingV2.DAL;
 using BioBookingV2.DTO;
 using System;
+
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,6 +12,8 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+
 
 namespace BioBookingV2
 {
@@ -18,22 +21,10 @@ namespace BioBookingV2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            VisningerLabel.Text = "Select Movie";
+            VisningerLabel.Text = "Vælg Film";
             SQLConnector con = new SQLConnector();
             if (!Page.IsPostBack)
             {
-                //string constr = ConfigurationManager.ConnectionStrings["BioBookingDB"].ConnectionString;
-                //SqlConnection con = new SqlConnection(constr);
-                //con.Open();
-
-                //SqlCommand com = new SqlCommand("Select Id, Title from Movie", con);
-                //SqlDataAdapter da = new SqlDataAdapter(com);
-                //DataSet ds = new DataSet();
-                //da.Fill(ds);
-                //inputDropDownList.DataTextField = ds.Tables[0].Columns["Title"].ToString();
-                //inputDropDownList.DataValueField = ds.Tables[0].Columns["Id"].ToString();
-                //inputDropDownList.DataSource = ds.Tables[0];
-                //inputDropDownList.DataBind();
 
                 List<MovieDTO> lisMovies = new List<MovieDTO>();
                 lisMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
@@ -50,35 +41,82 @@ namespace BioBookingV2
         {
             SQLConnector con = new SQLConnector();
 
-            List<ScreeningDTO> lisScreening = new List<ScreeningDTO>();
-            lisScreening = con.GetAll("Screening", "MovieId", inputDropDownList.Text, typeof(int)).Cast<ScreeningDTO>().ToList();
+            List<MovieDTO> listMovies = new List<MovieDTO>();
+            listMovies = con.GetAll("Movie").Cast<MovieDTO>().ToList();
 
-            foreach (ScreeningDTO Screening in lisScreening)
+            List<ScreeningDTO> listScreening = new List<ScreeningDTO>();
+            listScreening = con.GetAll("Screening", "MovieId", inputDropDownList.Text, typeof(int)).Cast<ScreeningDTO>().ToList();
+
+            if (listMovies.Count > 0)
             {
-                object obj = con.Get("Movie", Screening.MovieId);
-                foreach (PropertyInfo pi in obj.GetType().GetProperties())
+                foreach (MovieDTO Movie in listMovies)
                 {
-                    if (pi.Name == "Title")
+                    if (Movie.Id == Convert.ToInt32(inputDropDownList.Text))
                     {
-                        var movie = pi.GetValue(obj);
+                        //wrapper div
+                        HtmlGenericControl WrapperDiv = new HtmlGenericControl("DIV");
+                        WrapperDiv.Attributes["class"] = "row";
+                        MovieBody.Controls.Add(WrapperDiv);
+
+                        //adding div for movie
+                        HtmlGenericControl MovieDiv = new HtmlGenericControl("DIV");
+                        MovieDiv.Attributes["class"] = "col-md-12";
+                        string StringDivId = "div-mov-" + Movie.Id;
+                        MovieDiv.Attributes["Id"] = StringDivId;
+                        WrapperDiv.Controls.Add(MovieDiv);
+
+                        //Adding div for poster
+                        HtmlGenericControl PosterDiv = new HtmlGenericControl("DIV");
+                        PosterDiv.Attributes["class"] = "col-md-4 class";
+                        string StringPosterDivId = "div-poster-" + Movie.Id;
+                        PosterDiv.Attributes["Id"] = StringPosterDivId;
+                        MovieDiv.Controls.Add(PosterDiv);
+
+                        //Adding poster img to poster div
+                        HtmlGenericControl MoviePosterImg = new HtmlGenericControl("IMG");
+                        MoviePosterImg.Attributes["src"] = "/content/images/" + Movie.PosterFileName;
+                        MoviePosterImg.Attributes["height"] = "450px";
+                        MoviePosterImg.Attributes["width"] = "300px";
+                        string StringPosterImgId = "img-poster-" + Movie.Id;
+                        MoviePosterImg.Attributes["Id"] = StringPosterImgId;
+                        PosterDiv.Controls.Add(MoviePosterImg);
+
+                        //Adding div for movie details
+                        HtmlGenericControl DetailDiv = new HtmlGenericControl("DIV");
+                        DetailDiv.Attributes["class"] = "col-md-8";
+                        string StringDetailDivId = "div-detail-" + Movie.Id;
+                        DetailDiv.Attributes["Id"] = StringDetailDivId;
+                        MovieDiv.Controls.Add(DetailDiv);
+
+                        //Adding Label for movie in movie detail div
+                        HtmlGenericControl H1Title = new HtmlGenericControl("H1");
+                        H1Title.InnerHtml = Movie.Title;
+                        DetailDiv.Controls.Add(H1Title);
+
+                        //Adding description for movie in movie detail div
+                        HtmlGenericControl Description = new HtmlGenericControl("P");
+                        Description.InnerText = Movie.Description;
+                        DetailDiv.Controls.Add(Description);
+
+                        HtmlGenericControl LineBreak = new HtmlGenericControl("BR");
+                        MovieBody.Controls.Add(LineBreak);
+
                     }
                 }
+            }
 
-                object objT = con.Get("Theater", Screening.TheaterId);
-                foreach (PropertyInfo pi in obj.GetType().GetProperties())
+            if (listScreening.Count > 0)
+            {
+                foreach (ScreeningDTO Screening in listScreening)
                 {
-                    if (pi.Name == "Name")
-                    {
-                        var Theater = pi.GetValue(obj);
-                    }
+
+
+
                 }
-
-                var SDate = Screening.StartDate;
-                var EDate = Screening.EndDate;
-                var Seats = Screening.AvailableSeats;
-
             }
 
         }
     }
 }
+
+        

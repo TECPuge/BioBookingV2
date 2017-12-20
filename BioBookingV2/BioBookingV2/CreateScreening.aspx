@@ -9,34 +9,34 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:Label ID="staticLabel" Text="Select Movie:" runat="server"></asp:Label>
+            <asp:Label ID="staticLabel" Text="Vælg Film:" runat="server"></asp:Label>
                 <asp:DropDownList ID="MovieDropDownList" runat="server">
                 </asp:DropDownList>
             <br />
-            <asp:Label ID="Label1" Text="Select Theater:" runat="server"></asp:Label>
+            <asp:Label ID="Label1" Text="Vælg Sal:" runat="server"></asp:Label>
                 <asp:DropDownList ID="TheaterDropDownList" runat="server" AutoPostBack="true"
                     onselectedindexchanged="SelectedIndexChanged">
                 </asp:DropDownList>
             <br />
-            <asp:Label ID="LabelStartDate" runat="server" Text="Start Time:"></asp:Label>
+            <asp:Label ID="LabelStartDate" runat="server" Text="Start tidspunkt:"></asp:Label>
                 <input id="InputStartDate" type="datetime-local" runat="server" />
                 <asp:RequiredFieldValidator ID="CheckStartDate" runat="server" ControlToValidate="InputStartDate"
-                    ForeColor="Red" ErrorMessage="Start date and time are required!"></asp:RequiredFieldValidator>
+                    ForeColor="Red" ErrorMessage="Start tidspunkt er påkrævet!"></asp:RequiredFieldValidator>
             <br/>
-            <asp:Label ID="LabelEndDate" runat="server" Text="End Time:"></asp:Label>
+            <asp:Label ID="LabelEndDate" runat="server" Text="Slut tidspunkt:"></asp:Label>
                 <input id="InputEndDate" type="datetime-local" runat="server" />
                 <asp:RequiredFieldValidator ID="CheckEndDate" runat="server" ControlToValidate="InputEndDate"
-                    ForeColor="Red" ErrorMessage="End date and time are required!"></asp:RequiredFieldValidator>
+                    ForeColor="Red" ErrorMessage="Slut tidspunkt er påkrævet!"></asp:RequiredFieldValidator>
             <br />
-            <asp:Label ID="Seats" runat="server" Text="Number of Seats:"></asp:Label>
+            <asp:Label ID="Seats" runat="server" Text="Antal Sæder:"></asp:Label>
                 <input id="InputSeats" type="text" runat="server" />
                 <asp:RequiredFieldValidator ID="CheckSeats" runat="server" ControlToValidate="InputSeats"
-                    ForeColor="Red" ErrorMessage="Number of Seats in the theater are required!"></asp:RequiredFieldValidator>
+                    ForeColor="Red" ErrorMessage="Antal sæder er påkrævet"></asp:RequiredFieldValidator>
             <br />
 
-            <asp:Button ID="ScreeningCreate" runat="server" OnClick="ScreeningCreate_Click" Text="Create Screening" />
+            <asp:Button ID="ScreeningCreate" runat="server" OnClick="ScreeningCreate_Click" Text="Opret filmvisning" />
 
-            <p>↓ Created Screening ↓</p>
+            <p>↓ Oprettet filmvisning ↓</p>
             <p><asp:Label ID="VisVisningLabel" runat="server" /></p>
             
         </div>
