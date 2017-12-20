@@ -11,6 +11,7 @@ using BioBookingV2.DTO;
 using System.Data;
 using System.Web.Security;
 using BioBookingV2.Utility;
+
 namespace BioBookingV2
 {
     public partial class WebForm1 : System.Web.UI.Page
@@ -36,8 +37,8 @@ namespace BioBookingV2
                 LastName = Lastname.Text,
                 Email = Email.Text
             };
-            // Insert new movie into table
-
+						
+            // Insert User into table
             List<ResourceDTO> ExistingUser = new List<ResourceDTO>();
             ExistingUser = con.GetAll("Resource", "LoginName", NewResource.LoginName, typeof(string)).Cast<ResourceDTO>().ToList();
             if (ExistingUser.Count == 0)
